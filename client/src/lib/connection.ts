@@ -39,11 +39,12 @@ export class Connection {
 	close() {
 		this.ws.close();
 	}
-	write() {
+	write(message: string) {
+		if (message.length < 1) return;
 		this.ws.send(
 			JSON.stringify(<message>{
 				Type: "message",
-				Data: "some data lol",
+				Data: message,
 				Room: this.room,
 				SenderId: this.id,
 				SenderName: "Kuba",
