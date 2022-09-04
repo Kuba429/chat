@@ -17,7 +17,16 @@
 	setContext("conn", conn);
 </script>
 
-<main>
-	<InputPanel />
+<div>
 	<MessagesContainer />
-</main>
+	<InputPanel />
+</div>
+
+<style>
+	div {
+		padding: 10px;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+</style>

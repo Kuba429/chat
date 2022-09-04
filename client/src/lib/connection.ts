@@ -1,5 +1,5 @@
 import type { message } from "./types";
-
+import { getUsername } from "./username";
 export class Connection {
 	ws: WebSocket;
 	id: string;
@@ -47,7 +47,7 @@ export class Connection {
 				Data: message,
 				Room: this.room,
 				SenderId: this.id,
-				SenderName: "Kuba",
+				SenderName: getUsername() || "guest",
 			})
 		);
 	}
