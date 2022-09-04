@@ -23,7 +23,7 @@ export class Connection {
 				JSON.stringify(<message>{
 					type: "join",
 					data: "",
-					roomId: this.room,
+					room: this.room,
 					senderId: this.id,
 					senderName: "Kuba",
 				})
@@ -43,7 +43,7 @@ export class Connection {
 			JSON.stringify(<message>{
 				type: "message",
 				data: "",
-				roomId: "",
+				room: "",
 				senderId: this.id,
 				senderName: "Kuba",
 			})
@@ -54,7 +54,7 @@ export class Connection {
 interface message {
 	type: "join" | "message" | "leave";
 	data: string;
-	roomId: string;
+	room: string;
 	senderName: string;
 	senderId: string;
 }
