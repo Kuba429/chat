@@ -31,7 +31,8 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 		}
 		switch message.Type {
 		case "message":
-			printRooms(hub.Rooms)
+			// printRooms(hub.Rooms)
+			hub.Send(message)
 		case "join":
 			hub.Join(message, conn)
 		case "leave":

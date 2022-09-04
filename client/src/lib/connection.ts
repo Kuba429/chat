@@ -1,31 +1,32 @@
+import type { message } from "./types";
+
 export class Connection {
-	#ws: WebSocket;
+	ws: WebSocket;
 	id: string;
 	room: string;
 	constructor(room: string) {
-		this.#ws = new WebSocket("ws://localhost:3000/ws"); // store url in .env
+		this.ws = new WebSocket("ws://localhost:3000/ws"); // store url in .env
 		this.id = crypto.randomUUID();
 		this.room = room;
 
 		// event handlers
-		this.#ws.onopen = () => {
+		this.ws.onopen = () => {
 			console.log("open");
 			this.joinRoom();
 		};
-		this.#ws.onclose = () => {
+		this.ws.onclose = () => {
 			console.log("close");
 		};
-		this.#ws.onmessage = (m) => console.log(m);
 	}
 	joinRoom() {
-		if (this.#ws.readyState === 1) {
-			this.#ws.send(
+		if (this.ws.readyState === 1) {
+			this.ws.send(
 				JSON.stringify(<message>{
-					type: "join",
-					data: "",
-					room: this.room,
-					senderId: this.id,
-					senderName: "Kuba",
+					Type: "join",
+					Data: "",
+					Room: this.room,
+					SenderId: this.id,
+					SenderName: "Kuba",
 				})
 			);
 		} else {
@@ -36,25 +37,17 @@ export class Connection {
 		}
 	}
 	close() {
-		this.#ws.close();
+		this.ws.close();
 	}
 	write() {
-		this.#ws.send(
+		this.ws.send(
 			JSON.stringify(<message>{
-				type: "message",
-				data: "some data lol",
-				room: this.room,
-				senderId: this.id,
-				senderName: "Kuba",
+				Type: "message",
+				Data: "some data lol",
+				Room: this.room,
+				SenderId: this.id,
+				SenderName: "Kuba",
 			})
 		);
 	}
-}
-
-interface message {
-	type: "join" | "message" | "leave";
-	data: string;
-	room: string;
-	senderName: string;
-	senderId: string;
 }

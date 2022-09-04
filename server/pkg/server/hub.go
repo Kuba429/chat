@@ -8,6 +8,12 @@ type Hub struct {
 	Rooms map[string][]User
 }
 
+func (hub Hub) Send(message Message) {
+	room := hub.Rooms[message.Room]
+	for _, user := range room {
+		user.Conn.WriteJSON(message)
+	}
+}
 func (hub Hub) Join(message Message, conn *websocket.Conn) {
 	hub.Rooms[message.Room] = append(hub.Rooms[message.Room], User{
 		Conn: conn,
