@@ -22,27 +22,29 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer conn.Close()
-	lastMessage := Message{} // store last message to leave last visited room
+	message := Message{}
 	for {
-		var message Message
 		err := conn.ReadJSON(&message)
 		if err != nil {
-			fmt.Println("leave")
-			hub.Leave(lastMessage)
+			hub.Leave(message)
 			break
 		}
 		switch message.Type {
 		case "message":
-			fmt.Println(hub.Rooms)
+			printRooms(hub.Rooms)
 		case "join":
-			fmt.Println("join")
 			hub.Join(message, conn)
 		case "leave":
-			fmt.Println("leave")
 			hub.Leave(message)
-			conn.Close()
 		}
 
 	}
 
+}
+
+func printRooms(rooms map[string][]User) {
+	fmt.Println("Rooms: ")
+	for k := range rooms {
+		fmt.Printf("\"%s\": %o \n", k, len(rooms[k]))
+	}
 }

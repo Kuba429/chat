@@ -42,8 +42,8 @@ export class Connection {
 		this.#ws.send(
 			JSON.stringify(<message>{
 				type: "message",
-				data: "",
-				room: "",
+				data: "some data lol",
+				room: this.room,
 				senderId: this.id,
 				senderName: "Kuba",
 			})
