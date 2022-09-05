@@ -9,7 +9,7 @@
 	const conn: Connection = getContext("conn");
 	onMount(() => {
 		conn.ws.onmessage = (m) => {
-			messagesStore.set([...$messagesStore, JSON.parse(m.data)]);
+			messagesStore.set([JSON.parse(m.data), ...$messagesStore]);
 		};
 	});
 </script>
@@ -22,6 +22,11 @@
 
 <style>
 	div {
+		margin: 10px;
 		height: 100%;
+		overflow: auto;
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 1rem;
 	}
 </style>

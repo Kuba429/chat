@@ -5,6 +5,7 @@
 	import InputPanel from "../components/InputPanel.svelte";
 	import type { message } from "../types";
 	import { writable } from "svelte/store";
+	import Header from "../components/Header.svelte";
 	export let currentRoute;
 	const roomId = currentRoute.namedParams.room;
 	let conn: Connection = new Connection(roomId);
@@ -18,15 +19,16 @@
 </script>
 
 <div>
+	<Header />
 	<MessagesContainer />
 	<InputPanel />
 </div>
 
 <style>
 	div {
-		padding: 10px;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
+		/* padding: 10px; */
 	}
 </style>
