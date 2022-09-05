@@ -27,6 +27,7 @@
 <style>
 	div {
 		height: 100%;
+		background-color: var(--primary);
 		display: flex;
 		flex-direction: column;
 		/* padding: 10px; */
