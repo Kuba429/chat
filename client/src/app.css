@@ -4,7 +4,8 @@
 :root {
 	--primary: #242424;
 	--secondary: #2f2f2f;
-	--contrasting: #efe9f4;
+	--contrasting: #f0ebf5;
+	--contrasting-dimm: #858585;
 }
 :root,
 html,

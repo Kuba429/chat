@@ -40,7 +40,9 @@
 			placeholder="Type here..."
 		/>
 	</div>
-	<button style="--height: {textareaOgHeight}px" on:click={send}>▶</button>
+	<button style="--height: {textareaOgHeight}px" on:click={send}>
+		<i class="fa-solid fa-paper-plane" />
+	</button>
 </div>
 
 <style>
@@ -70,20 +72,25 @@
 		border-radius: inherit;
 	}
 	textarea {
-		transition: ease background 0.1s;
-		background-color: transparent;
+		transition: ease border 0.2s;
+		background-color: var(--secondary);
 		border: 1px solid var(--secondary);
 	}
 	textarea:focus {
-		background-color: var(--secondary);
+		border: 1px solid var(--contrasting-dimm);
 	}
 	button {
 		height: var(--height);
 		width: var(--height);
-		background: var(--secondary);
-		border: 0;
+		font-size: 1rem;
+		background: transparent;
+		box-sizing: border-box;
+		border: 2px dashed transparent;
 		border-radius: 50%;
 		cursor: pointer;
 		color: var(--contrasting);
+	}
+	button:hover {
+		border-color: var(--contrasting-dimm);
 	}
 </style>
