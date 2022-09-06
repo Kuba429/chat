@@ -6,4 +6,5 @@ type Message struct {
 	Room       string
 	SenderId   string
 	SenderName string
+	Date       uint64
 }

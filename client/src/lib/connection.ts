@@ -48,6 +48,7 @@ export class Connection {
 				Room: this.room,
 				SenderId: this.id,
 				SenderName: getUsername() || "guest",
+				Date: new Date().getTime(),
 			})
 		);
 	}

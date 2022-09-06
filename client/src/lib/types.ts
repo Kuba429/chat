@@ -5,4 +5,5 @@ export type message = {
 	Room: string;
 	SenderName: string;
 	SenderId: string;
+	Date: number;
 };
