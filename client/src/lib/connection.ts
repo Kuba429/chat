@@ -1,12 +1,14 @@
 import type { message } from "./types";
 import { getUsername } from "./username";
+import { v4 } from "uuid";
+// crypto.randomUUID threw on my phone's browser so i used uuid package
 export class Connection {
 	ws: WebSocket;
 	id: string;
 	room: string;
 	constructor(room: string) {
 		this.ws = new WebSocket("ws://localhost:3000/ws"); // store url in .env
-		this.id = crypto.randomUUID();
+		this.id = v4();
 		this.room = room;
 
 		// event handlers
