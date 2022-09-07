@@ -7,7 +7,7 @@ export class Connection {
 	id: string;
 	room: string;
 	constructor(room: string) {
-		this.ws = new WebSocket("ws://localhost:3000/ws"); // store url in .env
+		this.ws = new WebSocket(import.meta.env.VITE_WS_SERVER);
 		this.id = v4();
 		this.room = room;
 
