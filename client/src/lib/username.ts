@@ -3,5 +3,5 @@ export const setUsername = (username: string) => {
 	localStorage.setItem(usernameKey, username);
 };
 export const getUsername = () => {
-	return localStorage.getItem(usernameKey) || null;
+	return localStorage.getItem(usernameKey) || "guest";
 };

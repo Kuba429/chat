@@ -2,10 +2,15 @@
 	box-sizing: border-box;
 }
 :root {
-	--primary: #242424;
-	--secondary: #2f2f2f;
-	--contrasting: #f0ebf5;
-	--contrasting-dimm: #858585;
+	--primary-rgb: 36, 36, 36;
+	--secondary-rgb: 47, 47, 47;
+	--contrasting-rgb: 240, 235, 245;
+	--contrasting-dimm-rgb: 133, 133, 133;
+
+	--primary: rgb(var(--primary-rgb));
+	--secondary: rgb(var(--secondary-rgb));
+	--contrasting: rgb(var(--contrasting-rgb));
+	--contrasting-dimm: rgb(var(--contrasting-dimm-rgb));
 }
 :root,
 html,

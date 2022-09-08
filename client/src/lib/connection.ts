@@ -49,7 +49,7 @@ export class Connection {
 				Data: message,
 				Room: this.room,
 				SenderId: this.id,
-				SenderName: getUsername() || "guest",
+				SenderName: getUsername(),
 				Date: new Date().getTime(),
 			})
 		);
