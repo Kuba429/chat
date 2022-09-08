@@ -1,9 +1,3 @@
 {
-	"redirects": [
-		{
-			"source": "/*",
-			"destination": "/index.html",
-			"statusCode": 200
-		}
-	]
+	"rewrites": [{ "source": "/r/:id", "destination": "/index.html" }]
 }
