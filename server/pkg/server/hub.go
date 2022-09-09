@@ -35,7 +35,13 @@ func (hub Hub) Leave(message Message) {
 		}
 	}
 }
-
+func (hub Hub) CountUsers() int {
+	var sum int = 0
+	for _, users := range hub.Rooms {
+		sum += int(len(users))
+	}
+	return sum
+}
 func CreateHub() Hub {
 	return Hub{Rooms: make(map[string][]User)}
 }

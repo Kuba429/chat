@@ -12,7 +12,7 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
-var hub = CreateHub()
+var MainHub = CreateHub()
 
 // TODO duplicates appear when 2 connections (from 2 clients) exist. Possibly client's fault
 func HandleSocket(w http.ResponseWriter, r *http.Request) {
@@ -26,17 +26,17 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 	for {
 		err := conn.ReadJSON(&message)
 		if err != nil {
-			hub.Leave(message)
+			MainHub.Leave(message)
 			break
 		}
 		switch message.Type {
 		case "message":
 			// printRooms(hub.Rooms)
-			hub.Send(message)
+			MainHub.Send(message)
 		case "join":
-			hub.Join(message, conn)
+			MainHub.Join(message, conn)
 		case "leave":
-			hub.Leave(message)
+			MainHub.Leave(message)
 		}
 
 	}

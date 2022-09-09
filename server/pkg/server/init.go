@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 func Init() {
@@ -15,5 +16,9 @@ func Init() {
 	fmt.Printf("port: %s \n", PORT)
 	log.Println("server init")
 	http.HandleFunc("/ws", HandleSocket)
+	http.HandleFunc("/getUserCount", func(w http.ResponseWriter, r *http.Request) {
+		count := MainHub.CountUsers()
+		w.Write([]byte(strconv.Itoa(count)))
+	})
 	log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }
