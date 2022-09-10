@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { roomStatusStore } from "../stores/roomStatus";
 	import { getUsername } from "../username";
 	import UsernameModal from "./UsernameModal.svelte";
 
@@ -9,7 +10,7 @@
 <header>
 	<span on:click={() => (showModal = true)} class="username">{username}</span>
 	<div>
-		<span>room: §</span>
+		<span>room: {$roomStatusStore.users.length}</span>
 	</div>
 </header>
 {#if showModal}

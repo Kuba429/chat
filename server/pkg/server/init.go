@@ -17,8 +17,11 @@ func Init() {
 	log.Println("server init")
 	http.HandleFunc("/ws", HandleSocket)
 	http.HandleFunc("/getUserCount", func(w http.ResponseWriter, r *http.Request) {
-		count := MainHub.CountUsers()
-		w.Write([]byte(strconv.Itoa(count)))
+		sum := 0
+		for _, users := range MainHub.Rooms {
+			sum += int(len(users))
+		}
+		w.Write([]byte(strconv.Itoa(sum)))
 	})
 	log.Fatal(http.ListenAndServe(":"+PORT, nil))
 }

@@ -1,6 +1,8 @@
 package server
 
 import (
+	"strings"
+
 	"github.com/gorilla/websocket"
 )
 
@@ -9,17 +11,21 @@ type Hub struct {
 }
 
 func (hub Hub) Send(message Message) {
-	room := hub.Rooms[message.Room]
-	for _, user := range room {
+	for _, user := range hub.Rooms[message.Room] {
 		user.Conn.WriteJSON(message)
 	}
 }
+
 func (hub Hub) Join(message Message, conn *websocket.Conn) {
 	hub.Rooms[message.Room] = append(hub.Rooms[message.Room], User{
 		Conn: conn,
+		Name: message.SenderName,
 		Id:   message.SenderId,
 	})
+	message.Data = hub.GetUsernames(message.Room)
+	hub.Send(message)
 }
+
 func (hub Hub) Leave(message Message) {
 	room := hub.Rooms[message.Room]
 	if len(room) <= 1 {
@@ -34,14 +40,18 @@ func (hub Hub) Leave(message Message) {
 			}
 		}
 	}
+	message.Data = hub.GetUsernames(message.Room)
+	hub.Send(message)
 }
-func (hub Hub) CountUsers() int {
-	var sum int = 0
-	for _, users := range hub.Rooms {
-		sum += int(len(users))
+
+func (hub Hub) GetUsernames(room string) string {
+	var usernames []string
+	for _, user := range hub.Rooms[room] {
+		usernames = append(usernames, user.Name)
 	}
-	return sum
+	return strings.Join(usernames, ",")
 }
+
 func CreateHub() Hub {
 	return Hub{Rooms: make(map[string][]User)}
 }

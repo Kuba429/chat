@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -14,7 +13,6 @@ var upgrader = websocket.Upgrader{
 
 var MainHub = CreateHub()
 
-// TODO duplicates appear when 2 connections (from 2 clients) exist. Possibly client's fault
 func HandleSocket(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -43,9 +41,9 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func printRooms(rooms map[string][]User) {
-	fmt.Println("Rooms: ")
-	for k := range rooms {
-		fmt.Printf("\"%s\": %o \n", k, len(rooms[k]))
-	}
-}
+// func printRooms(rooms map[string][]User) {
+// 	fmt.Println("Rooms: ")
+// 	for k := range rooms {
+// 		fmt.Printf("\"%s\": %o \n", k, len(rooms[k]))
+// 	}
+// }

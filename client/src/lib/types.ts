@@ -7,3 +7,8 @@ export type message = {
 	SenderId: string;
 	Date: number;
 };
+
+export type roomStatus = {
+	room: string;
+	users: string[];
+};

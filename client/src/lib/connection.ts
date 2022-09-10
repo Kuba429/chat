@@ -1,7 +1,9 @@
 import type { message } from "./types";
 import { getUsername } from "./username";
 import { v4 } from "uuid";
-// crypto.randomUUID threw on my phone's browser so i used uuid package
+import { messagesStore } from "./stores/messages";
+import { roomStatusStore } from "./stores/roomStatus";
+
 export class Connection {
 	ws: WebSocket;
 	id: string;
@@ -19,6 +21,21 @@ export class Connection {
 		this.ws.onclose = () => {
 			console.log("close");
 		};
+		this.ws.onmessage = this.receive;
+	}
+	receive(messageRaw: MessageEvent<string>) {
+		const message: message = JSON.parse(messageRaw.data);
+		switch (message.Type) {
+			case "message":
+				messagesStore.update((state) => [message, ...state]);
+				break;
+			case "join":
+			case "leave":
+				roomStatusStore.set({
+					users: message.Data.split(","),
+					room: this.room,
+				});
+		}
 	}
 	joinRoom() {
 		if (this.ws.readyState === 1) {

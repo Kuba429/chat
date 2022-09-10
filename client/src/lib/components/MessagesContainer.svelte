@@ -1,17 +1,6 @@
 <script lang="ts">
-	import { getContext, onMount } from "svelte";
-	import type { Writable } from "svelte/store";
-	import type { Connection } from "../connection";
-	import type { message } from "../types";
+	import { messagesStore } from "../stores/messages";
 	import Message from "./Message.svelte";
-
-	const messagesStore: Writable<message[]> = getContext("messagesStore");
-	const conn: Connection = getContext("conn");
-	onMount(() => {
-		conn.ws.onmessage = (m) => {
-			messagesStore.set([JSON.parse(m.data), ...$messagesStore]);
-		};
-	});
 </script>
 
 <div>
