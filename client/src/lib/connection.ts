@@ -3,6 +3,7 @@ import { getUsername } from "./username";
 import { v4 } from "uuid";
 import { messagesStore } from "./stores/messages";
 import { roomStatusStore } from "./stores/roomStatus";
+import { headStore } from "./stores/head";
 
 export class Connection {
 	ws: WebSocket;
@@ -12,7 +13,6 @@ export class Connection {
 		this.ws = new WebSocket(import.meta.env.VITE_WS_SERVER);
 		this.id = v4();
 		this.room = room;
-
 		// event handlers
 		this.ws.onopen = () => {
 			console.log("open");
@@ -28,6 +28,7 @@ export class Connection {
 		switch (message.Type) {
 			case "message":
 				messagesStore.update((state) => [message, ...state]);
+				notify(message);
 				break;
 			case "join":
 			case "leave":
@@ -45,7 +46,7 @@ export class Connection {
 					Data: "",
 					Room: this.room,
 					SenderId: this.id,
-					SenderName: "Kuba",
+					SenderName: getUsername(),
 				})
 			);
 		} else {
@@ -72,3 +73,29 @@ export class Connection {
 		);
 	}
 }
+
+const notify = (() => {
+	if ("Notification" in window) {
+		Notification.requestPermission();
+		document.addEventListener("visibilitychange", () => {
+			if (!document.hidden)
+				headStore.update((state) => ({ ...state, title: "Chat" }));
+		});
+		return (message: message) => {
+			if (document.hidden) {
+				headStore.update((state) => ({
+					...state,
+					title: `${message.SenderName}: ${message.Data}`,
+				}));
+				new Notification(message.SenderName, {
+					body: message.Data,
+					tag: message.Room,
+				});
+			}
+		};
+	}
+	// Notifications not supported
+	return (_: message) => {
+		return;
+	};
+})();

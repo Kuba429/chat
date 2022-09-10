@@ -4,6 +4,7 @@
 	import MessagesContainer from "../components/MessagesContainer.svelte";
 	import InputPanel from "../components/InputPanel.svelte";
 	import Header from "../components/Header.svelte";
+	import { headStore } from "../stores/head";
 	export let currentRoute;
 	const roomId = currentRoute.namedParams.room;
 	let conn: Connection = new Connection(roomId);
@@ -15,6 +16,9 @@
 	setContext("conn", conn);
 </script>
 
+<svelte:head>
+	<title>{$headStore.title}</title>
+</svelte:head>
 <div>
 	<Header />
 	<MessagesContainer />
