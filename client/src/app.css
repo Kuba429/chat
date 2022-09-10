@@ -22,3 +22,23 @@ body,
 	color: rgba(255, 255, 255, 0.87);
 	background-color: var(--secondary);
 }
+
+/* scrollbar */
+/* tested on chrome, safari, firefox */
+* {
+	scrollbar-color: var(--contrasting-dimm);
+	scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+	width: 5px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+	background: var(--secondary);
+	border-radius: 5px;
+}
+*::-webkit-scrollbar-thumb:hover {
+	background: var(--contrasting-dimm);
+}

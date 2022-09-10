@@ -70,6 +70,7 @@
 		border: none;
 		resize: none;
 		border-radius: inherit;
+		overflow: hidden;
 	}
 	textarea {
 		transition: ease border 0.2s;
@@ -86,6 +87,7 @@
 		background: transparent;
 		box-sizing: border-box;
 		border: 2px dashed transparent;
+		transition: ease border 0.1s;
 		border-radius: 50%;
 		cursor: pointer;
 		color: var(--contrasting);
