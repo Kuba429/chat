@@ -6,6 +6,8 @@ export type message = {
 	SenderName: string;
 	SenderId: string;
 	Date: number;
+	Id: string;
+	IsPending?: boolean; // only for messages sent by this user
 };
 
 export type roomStatus = {

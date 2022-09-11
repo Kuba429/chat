@@ -78,7 +78,7 @@
 		border: 1px solid var(--secondary);
 	}
 	textarea:focus {
-		border: 1px solid var(--contrasting-dimm);
+		border: 1px solid var(--contrasting-dim);
 	}
 	button {
 		height: var(--height);
@@ -93,6 +93,6 @@
 		color: var(--contrasting);
 	}
 	button:hover {
-		border-color: var(--contrasting-dimm);
+		border-color: var(--contrasting-dim);
 	}
 </style>

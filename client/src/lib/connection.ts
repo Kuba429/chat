@@ -21,14 +21,23 @@ export class Connection {
 		this.ws.onclose = () => {
 			console.log("close");
 		};
-		this.ws.onmessage = this.receive;
+		// this.receive has no access to 'this' when it's assigned directly
+		this.ws.onmessage = (m) => this.receive(m);
 	}
 	receive(messageRaw: MessageEvent<string>) {
 		const message: message = JSON.parse(messageRaw.data);
 		switch (message.Type) {
 			case "message":
-				messagesStore.update((state) => [message, ...state]);
-				notify(message);
+				if (message.SenderId === this.id) {
+					messagesStore.update((state) => {
+						state.find((m) => m.Id === message.Id).IsPending =
+							false;
+						return state;
+					});
+				} else {
+					messagesStore.update((state) => [message, ...state]);
+					notify(message);
+				}
 				break;
 			case "join":
 			case "leave":
@@ -59,18 +68,22 @@ export class Connection {
 	close() {
 		this.ws.close();
 	}
-	write(message: string) {
-		if (message.length < 1) return;
-		this.ws.send(
-			JSON.stringify(<message>{
-				Type: "message",
-				Data: message,
-				Room: this.room,
-				SenderId: this.id,
-				SenderName: getUsername(),
-				Date: new Date().getTime(),
-			})
-		);
+	write(messageData: string) {
+		if (messageData.length < 1) return;
+		const message: message = {
+			Type: "message",
+			Data: messageData,
+			Room: this.room,
+			SenderId: this.id,
+			SenderName: getUsername(),
+			Date: new Date().getTime(),
+			Id: v4(),
+		};
+		messagesStore.update((state) => [
+			{ ...message, IsPending: true },
+			...state,
+		]);
+		this.ws.send(JSON.stringify(message));
 	}
 }
 

@@ -56,7 +56,7 @@
 		border-radius: 5px;
 	}
 	input:focus {
-		border: 1px solid var(--contrasting-dimm);
+		border: 1px solid var(--contrasting-dim);
 	}
 	form {
 		display: flex;
@@ -80,6 +80,6 @@
 	}
 	button:hover,
 	button:focus {
-		border-color: var(--contrasting-dimm);
+		border-color: var(--contrasting-dim);
 	}
 </style>

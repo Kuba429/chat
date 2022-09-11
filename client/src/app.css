@@ -5,12 +5,12 @@
 	--primary-rgb: 36, 36, 36;
 	--secondary-rgb: 47, 47, 47;
 	--contrasting-rgb: 240, 235, 245;
-	--contrasting-dimm-rgb: 133, 133, 133;
+	--contrasting-dim-rgb: 133, 133, 133;
 
 	--primary: rgb(var(--primary-rgb));
 	--secondary: rgb(var(--secondary-rgb));
 	--contrasting: rgb(var(--contrasting-rgb));
-	--contrasting-dimm: rgb(var(--contrasting-dimm-rgb));
+	--contrasting-dim: rgb(var(--contrasting-dim-rgb));
 }
 :root,
 html,
@@ -26,7 +26,7 @@ body,
 /* scrollbar */
 /* tested on chrome, safari, firefox */
 * {
-	scrollbar-color: var(--contrasting-dimm);
+	scrollbar-color: var(--contrasting-dim);
 	scrollbar-width: thin;
 }
 *::-webkit-scrollbar {
@@ -40,5 +40,5 @@ body,
 	border-radius: 5px;
 }
 *::-webkit-scrollbar-thumb:hover {
-	background: var(--contrasting-dimm);
+	background: var(--contrasting-dim);
 }

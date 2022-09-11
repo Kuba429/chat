@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class={isOwn ? "own" : ""}>
+<div class={`${isOwn ? "own" : ""} ${message?.IsPending ? "dim" : ""}`}>
 	<p class="username">
 		<!-- Reversing order here instead of in css because changing display of p messes up span position (it's not perfectly aligned with text outside of span tag) -->
 		{#if isOwn}
@@ -46,8 +46,11 @@
 	div.own {
 		align-self: flex-end;
 		text-align: right;
-		background-color: var(--contrasting-dimm);
+		background-color: var(--contrasting-dim);
 		color: var(--primary);
+	}
+	div.dim {
+		opacity: 0.8;
 	}
 	p {
 		padding: 0;

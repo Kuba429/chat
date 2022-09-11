@@ -7,4 +7,5 @@ type Message struct {
 	SenderId   string
 	SenderName string
 	Date       uint64
+	Id         string
 }
