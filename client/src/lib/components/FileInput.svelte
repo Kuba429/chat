@@ -41,8 +41,9 @@
 		border-radius: 10px;
 	}
 	.preview img {
-		object-fit: scale-down;
+		object-fit: contain;
 		max-width: 100%;
+		width: 400px;
 		max-height: 100%;
 	}
 	label {

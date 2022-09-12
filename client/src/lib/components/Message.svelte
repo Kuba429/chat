@@ -68,7 +68,8 @@
 		opacity: 70%;
 	}
 	img {
-		object-fit: scale-down;
+		object-fit: contain;
+		width: 400px;
 		max-width: 100%;
 		max-height: 80vh;
 	}

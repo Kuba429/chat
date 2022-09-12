@@ -1,7 +1,30 @@
-export const toBase64 = (file: File): Promise<string> =>
-	new Promise((resolve, reject) => {
+import Compressor from "compressorjs";
+
+export const toBase64 = async (file: File): Promise<string> => {
+	console.log(file);
+	const compressedBlob = await compress(file);
+	console.log(compressedBlob);
+	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
-		reader.readAsDataURL(new Blob([file]));
+		reader.readAsDataURL(compressedBlob);
 		reader.onload = () => resolve(reader.result as string);
 		reader.onerror = (error) => reject(error);
 	});
+};
+// implement generics todo
+const compress = (file: File): Promise<Blob> => {
+	return new Promise((resolve, reject) => {
+		new Compressor(file, {
+			success: (result) => {
+				if (result instanceof Blob) {
+					resolve(result);
+				} else {
+					resolve(new Blob([result]));
+				}
+			},
+			quality: 0.7,
+			maxWidth: 200,
+			maxHeight: 200,
+		});
+	});
+};
