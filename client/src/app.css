@@ -18,7 +18,7 @@ body,
 #app {
 	height: 100%;
 	margin: 0;
-	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+	font-family: "Inter", sans-serif;
 	color: rgba(255, 255, 255, 0.87);
 	background-color: var(--secondary);
 }
