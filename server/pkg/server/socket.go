@@ -35,8 +35,10 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 			MainHub.Join(message, conn)
 		case "leave":
 			MainHub.Leave(message)
-		}
 
+		case "username_update":
+			MainHub.UpdateUsername(message)
+		}
 	}
 
 }

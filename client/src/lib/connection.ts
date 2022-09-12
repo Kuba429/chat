@@ -41,6 +41,7 @@ export class Connection {
 				break;
 			case "join":
 			case "leave":
+			case "username_update":
 				roomStatusStore.set({
 					users: message.Data.split(","),
 					room: this.room,

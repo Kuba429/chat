@@ -4,6 +4,8 @@ specifiers:
   '@sveltejs/vite-plugin-svelte': ^1.0.1
   '@tsconfig/svelte': ^3.0.0
   '@types/uuid': ^8.3.4
+  prettier: ^2.7.1
+  prettier-plugin-svelte: ^2.7.0
   svelte: ^3.49.0
   svelte-check: ^2.8.0
   svelte-preprocess: ^4.10.7
@@ -21,6 +23,8 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.4_svelte@3.50.0+vite@3.0.9
   '@tsconfig/svelte': 3.0.0
   '@types/uuid': 8.3.4
+  prettier: 2.7.1
+  prettier-plugin-svelte: 2.7.0_jkiirj7yro4cfik5roozpcraa4
   svelte: 3.50.0
   svelte-check: 2.9.0_svelte@3.50.0
   svelte-preprocess: 4.10.7_25vz5gl6ox2pgh3uo5abz3kk6y
@@ -656,6 +660,22 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
+
+  /prettier-plugin-svelte/2.7.0_jkiirj7yro4cfik5roozpcraa4:
+    resolution: {integrity: sha512-fQhhZICprZot2IqEyoiUYLTRdumULGRvw0o4dzl5jt0jfzVWdGqeYW27QTWAeXhoupEZJULmNoH3ueJwUWFLIA==}
+    peerDependencies:
+      prettier: ^1.16.4 || ^2.0.0
+      svelte: ^3.2.0
+    dependencies:
+      prettier: 2.7.1
+      svelte: 3.50.0
+    dev: true
+
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /queue-microtask/1.2.3:

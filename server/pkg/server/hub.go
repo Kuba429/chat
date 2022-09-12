@@ -55,6 +55,16 @@ func (hub *Hub) Leave(message Message) {
 	message.Data = hub.GetUsernames(message.Room)
 	hub.Send(message)
 }
+func (hub *Hub) UpdateUsername(message Message) {
+	for idx, user := range MainHub.Rooms[message.Room] {
+		if user.Id == message.SenderId {
+			MainHub.Rooms[message.Room][idx].Name = message.SenderName
+		}
+	}
+	message.Data = MainHub.GetUsernames(message.Room)
+	MainHub.Send(message)
+
+}
 
 func (hub *Hub) GetUsernames(room string) string {
 	hub.mu.Lock()

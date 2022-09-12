@@ -1,13 +1,28 @@
 <script lang="ts">
-	import { createEventDispatcher, onMount } from "svelte";
+	import { createEventDispatcher, getContext, onMount } from "svelte";
+	import { v4 } from "uuid";
+	import type { Connection } from "../connection";
+	import type { message } from "../types";
 	import { getUsername, setUsername } from "../username";
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch("close");
 
+	const conn: Connection = getContext("conn");
 	let username = getUsername();
 	const handleSubmit = (e: Event) => {
 		e.preventDefault();
 		setUsername(username);
+		conn.ws.send(
+			JSON.stringify(<message>{
+				Type: "username_update",
+				Data: "",
+				Room: conn.room,
+				SenderName: username,
+				Date: new Date().getTime(),
+				SenderId: conn.id,
+				Id: v4(),
+			})
+		);
 		close();
 	};
 	let inputHeight = "";
