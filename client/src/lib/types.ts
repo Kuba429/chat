@@ -2,6 +2,7 @@
 export type message = {
 	Type: "join" | "message" | "leave" | "username_update";
 	Data: string;
+	Image?: string;
 	Room: string;
 	SenderName: string;
 	SenderId: string;

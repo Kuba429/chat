@@ -30,6 +30,9 @@
 		{/if}
 	</p>
 	<p>{message.Data}</p>
+	{#if message.Image}
+		<img src={message.Image} alt="image sent by {message.SenderName}" />
+	{/if}
 </div>
 
 <style>
@@ -63,5 +66,10 @@
 	p.username span.date {
 		font-size: 0.6em;
 		opacity: 70%;
+	}
+	img {
+		object-fit: scale-down;
+		max-width: 100%;
+		max-height: 80vh;
 	}
 </style>

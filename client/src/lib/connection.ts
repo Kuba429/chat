@@ -69,11 +69,12 @@ export class Connection {
 	close() {
 		this.ws.close();
 	}
-	write(messageData: string) {
-		if (messageData.length < 1) return;
+	write(messageData: string, image: string = "") {
+		if (messageData.length < 1 && image.length < 1) return;
 		const message: message = {
 			Type: "message",
 			Data: messageData,
+			Image: image,
 			Room: this.room,
 			SenderId: this.id,
 			SenderName: getUsername(),

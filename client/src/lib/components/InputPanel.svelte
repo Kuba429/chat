@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { getContext, onMount } from "svelte";
+	import { writable } from "svelte/store";
 	import type { Connection } from "../connection";
+	import FileInput from "./FileInput.svelte";
 
 	const conn: Connection = getContext("conn");
 	let textarea: HTMLTextAreaElement;
+	const imageStore = writable("");
 	let textareaOgHeight = 46; // this value is updated on mount. The first value is just a lucky guess
 
 	// handles height of textarea (when message includes more than 1 line)
@@ -20,8 +23,9 @@
 		}
 	};
 	const send = () => {
-		conn.write(textarea.value);
+		conn.write(textarea.value, $imageStore);
 		textarea.value = "";
+		imageStore.set("");
 		handleInput();
 	};
 	// set button height to textarea's original height (when textarea has only 1 row)
@@ -30,7 +34,7 @@
 	});
 </script>
 
-<div>
+<div id="input-panel">
 	<div class="wrapper">
 		<textarea
 			rows="1"
@@ -40,12 +44,18 @@
 			placeholder="Type here..."
 		/>
 	</div>
-	<button style="--height: {textareaOgHeight}px" on:click={send}>
-		<i class="fa-solid fa-paper-plane" />
-	</button>
+	<div style="--height: {textareaOgHeight}px" class="buttons">
+		<FileInput {imageStore} />
+		<button on:click={send}>
+			<i class="fa-solid fa-paper-plane" />
+		</button>
+	</div>
 </div>
 
 <style>
+	div#input-panel {
+		position: relative;
+	}
 	div {
 		margin: 10px;
 		height: fit-content;
@@ -80,7 +90,14 @@
 	textarea:focus {
 		border: 1px solid var(--contrasting-dim);
 	}
-	button {
+	.buttons {
+		display: flex;
+		height: fit-content;
+		width: fit-content;
+		padding: 0;
+		margin: 0;
+	}
+	:global(.buttons > *) {
 		height: var(--height);
 		width: var(--height);
 		font-size: 1rem;
@@ -92,7 +109,10 @@
 		cursor: pointer;
 		color: var(--contrasting);
 	}
-	button:hover {
+	:global(.buttons > *:hover) {
 		border-color: var(--contrasting-dim);
+	}
+	:global(.buttons *) {
+		cursor: pointer;
 	}
 </style>
