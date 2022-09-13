@@ -1,9 +1,7 @@
 import Compressor from "compressorjs";
 
 export const toBase64 = async (file: File): Promise<string> => {
-	console.log(file);
 	const compressedBlob = await compress(file);
-	console.log(compressedBlob);
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 		reader.readAsDataURL(compressedBlob);

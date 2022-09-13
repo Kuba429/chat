@@ -4,6 +4,7 @@ import { v4 } from "uuid";
 import { messagesStore } from "./stores/messages";
 import { roomStatusStore } from "./stores/roomStatus";
 import { headStore } from "./stores/head";
+import { connStatus } from "./stores/connStatus";
 
 export class Connection {
 	ws: WebSocket;
@@ -20,6 +21,7 @@ export class Connection {
 		};
 		this.ws.onclose = () => {
 			console.log("close");
+			connStatus.set(false);
 		};
 		// this.receive has no access to 'this' when it's assigned directly
 		this.ws.onmessage = (m) => this.receive(m);
@@ -59,6 +61,7 @@ export class Connection {
 					SenderName: getUsername(),
 				})
 			);
+			connStatus.set(true);
 		} else {
 			setTimeout(() => {
 				// if the socket isn't connected yet try to join again

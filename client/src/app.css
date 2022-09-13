@@ -6,11 +6,15 @@
 	--secondary-rgb: 47, 47, 47;
 	--contrasting-rgb: 240, 235, 245;
 	--contrasting-dim-rgb: 133, 133, 133;
+	--green-online-rgb: 110, 196, 114;
+	--red-offline-rgb: 255, 92, 95;
 
 	--primary: rgb(var(--primary-rgb));
 	--secondary: rgb(var(--secondary-rgb));
 	--contrasting: rgb(var(--contrasting-rgb));
 	--contrasting-dim: rgb(var(--contrasting-dim-rgb));
+	--green-online: rgb(var(--green-online-rgb));
+	--red-offline: rgb(var(--red-offline-rgb));
 }
 :root,
 html,
