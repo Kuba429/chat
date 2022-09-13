@@ -29,7 +29,7 @@
 			<span class="date">{date}</span>
 		{/if}
 	</p>
-	<p>{message.Data}</p>
+	<pre>{message.Data}</pre>
 	{#if message.Image}
 		<img src={message.Image} alt="image sent by {message.SenderName}" />
 	{/if}
@@ -55,7 +55,8 @@
 	div.dim {
 		opacity: 0.8;
 	}
-	p {
+	p,
+	pre {
 		padding: 0;
 		margin: 0;
 	}
