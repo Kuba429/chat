@@ -4,8 +4,9 @@
 	import type { Connection } from "../connection";
 	import type { message } from "../types";
 	import { getUsername, setUsername } from "../username";
+	import Modal from "./Modal.svelte";
+
 	const dispatch = createEventDispatcher();
-	const close = () => dispatch("close");
 
 	const conn: Connection = getContext("conn");
 	let username = getUsername();
@@ -23,7 +24,7 @@
 				Id: v4(),
 			})
 		);
-		close();
+		dispatch("close");
 	};
 	let inputHeight = "";
 	let input: HTMLInputElement;
@@ -32,33 +33,14 @@
 	});
 </script>
 
-<div class="modal-background" on:click={close} />
-<div class="modal">
+<Modal close={() => dispatch("close")}>
 	<form on:submit={handleSubmit}>
 		<input type="text" bind:value={username} bind:this={input} />
 		<button style="--input-height: {inputHeight}" type="submit">Set</button>
 	</form>
-</div>
+</Modal>
 
 <style>
-	.modal-background {
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		position: absolute;
-		z-index: 10;
-		background-color: rgba(var(--primary-rgb), 0.7);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-	}
-	div.modal {
-		position: absolute;
-		z-index: 20;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
 	input {
 		padding: 10px;
 		font-size: 1.3rem;
