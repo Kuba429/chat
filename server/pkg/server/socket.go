@@ -38,7 +38,12 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 
 		case "username_update":
 			MainHub.UpdateUsername(message)
+		case "ping":
+			log.Println("ping")
+			message.Data = "pong"
+			conn.WriteJSON(message)
 		}
+
 	}
 
 }

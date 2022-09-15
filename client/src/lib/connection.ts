@@ -14,14 +14,27 @@ export class Connection {
 		this.ws = new WebSocket(import.meta.env.VITE_WS_SERVER);
 		this.id = v4();
 		this.room = room;
+
+		let pingInterval;
 		// event handlers
 		this.ws.onopen = () => {
 			console.log("open");
 			this.joinRoom();
+			pingInterval = setInterval(() => {
+				console.log("ping");
+				this.ws.send(
+					JSON.stringify(<message>{
+						Data: "ping",
+						SenderId: this.id,
+						Room: this.room,
+					})
+				);
+			}, 1000 * 60 * 10); // ping server once every 10 minutes to maintain ws connection (free tier server because i'm poor :( )
 		};
 		this.ws.onclose = () => {
 			console.log("close");
 			connStatus.set(false);
+			clearInterval(pingInterval);
 		};
 		// this.receive has no access to 'this' when it's assigned directly
 		this.ws.onmessage = (m) => this.receive(m);
