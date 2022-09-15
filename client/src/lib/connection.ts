@@ -1,5 +1,5 @@
 import type { message } from "./types";
-import { getUsername } from "./username";
+import { defaultUsername, getUsername } from "./username";
 import { v4 } from "uuid";
 import { messagesStore } from "./stores/messages";
 import { roomStatusStore } from "./stores/roomStatus";
@@ -58,7 +58,7 @@ export class Connection {
 					Data: "",
 					Room: this.room,
 					SenderId: this.id,
-					SenderName: getUsername(),
+					SenderName: getUsername() || defaultUsername,
 				})
 			);
 			connStatus.set(true);
@@ -80,7 +80,7 @@ export class Connection {
 			Image: image,
 			Room: this.room,
 			SenderId: this.id,
-			SenderName: getUsername(),
+			SenderName: getUsername() || defaultUsername,
 			Date: new Date().getTime(),
 			Id: v4(),
 		};

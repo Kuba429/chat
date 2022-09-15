@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { getUsername } from "../username";
+	import { defaultUsername, getUsername } from "../username";
 	import UsernameModal from "./UsernameModal.svelte";
 	import ConnectionStatus from "./ConnectionStatus.svelte";
 
 	let username = getUsername();
-	let showModal = false;
+	let showModal = username.length < 1;
 </script>
 
 <header>
-	<span on:click={() => (showModal = true)} class="username">{username}</span>
+	<span on:click={() => (showModal = true)} class="username"
+		>{username || defaultUsername}</span
+	>
 	<div>
 		<ConnectionStatus />
 	</div>

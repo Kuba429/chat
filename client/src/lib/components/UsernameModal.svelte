@@ -30,6 +30,7 @@
 	let input: HTMLInputElement;
 	onMount(() => {
 		inputHeight = getComputedStyle(input).height;
+		input.select();
 	});
 </script>
 

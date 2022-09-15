@@ -1,7 +1,11 @@
-const usernameKey = "chat-sv-go-username";
+export const usernameLSKey = "chat-sv-go-username";
+export const defaultUsername = "guest";
 export const setUsername = (username: string) => {
-	localStorage.setItem(usernameKey, username !== "guest" ? username : "");
+	localStorage.setItem(
+		usernameLSKey,
+		username !== defaultUsername ? username : ""
+	);
 };
 export const getUsername = () => {
-	return localStorage.getItem(usernameKey) || "guest";
+	return localStorage.getItem(usernameLSKey);
 };

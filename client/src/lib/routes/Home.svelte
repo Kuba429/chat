@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { navigateTo } from "svelte-router-spa";
-	import { getUsername, setUsername } from "../username";
+	import { defaultUsername, getUsername, setUsername } from "../username";
 	let roomValue: string;
-	let usernameValue = getUsername();
+	let usernameValue = getUsername() || defaultUsername;
 	const handleClick = (e) => {
 		setUsername(usernameValue);
 		navigateTo("/r/" + roomValue);
