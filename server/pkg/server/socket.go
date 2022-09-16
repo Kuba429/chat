@@ -19,8 +19,11 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	defer conn.Close()
 	message := Message{}
+	defer func() {
+		MainHub.Leave(message)
+		conn.Close()
+	}()
 	for {
 		err := conn.ReadJSON(&message)
 		if err != nil {
@@ -29,21 +32,14 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 		}
 		switch message.Type {
 		case "message":
-			// printRooms(hub.Rooms)
 			MainHub.Send(message)
-		case "join":
-			MainHub.Join(message, conn)
 		case "leave":
 			MainHub.Leave(message)
-
+		case "join":
+			MainHub.Join(message, conn)
 		case "username_update":
 			MainHub.UpdateUsername(message)
-		case "ping":
-			log.Println("ping")
-			message.Data = "pong"
-			conn.WriteJSON(message)
 		}
-
 	}
 
 }

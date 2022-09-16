@@ -38,16 +38,11 @@ func (hub *Hub) Join(message Message, conn *websocket.Conn) {
 func (hub *Hub) Leave(message Message) {
 	hub.mu.Lock()
 	room := hub.Rooms[message.Room]
-	if len(room) <= 1 {
-		delete(hub.Rooms, message.Room)
-	} else {
-		for i := 0; i < len(room); i++ {
-			if room[i].Id == message.SenderId {
-				room[i] = room[len(room)-1]
-				room[len(room)-1] = User{}
-				hub.Rooms[message.Room] = room[:len(room)-1]
-				break
-			}
+	for i := 0; i < len(room); i++ {
+		if room[i].Id == message.SenderId {
+			room[i] = room[len(room)-1]
+			hub.Rooms[message.Room] = room[:len(room)-1]
+			break
 		}
 	}
 	hub.mu.Unlock()
