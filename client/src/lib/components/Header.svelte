@@ -4,7 +4,7 @@
 	import ConnectionStatus from "./ConnectionStatus.svelte";
 
 	let username = getUsername();
-	let showModal = username.length < 1;
+	let showModal = !(username?.length > 0);
 </script>
 
 <header>

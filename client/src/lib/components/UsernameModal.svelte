@@ -36,7 +36,12 @@
 
 <Modal close={() => dispatch("close")}>
 	<form on:submit={handleSubmit}>
-		<input type="text" bind:value={username} bind:this={input} />
+		<input
+			type="text"
+			placeholder="Username"
+			bind:value={username}
+			bind:this={input}
+		/>
 		<button style="--input-height: {inputHeight}" type="submit">Set</button>
 	</form>
 </Modal>
