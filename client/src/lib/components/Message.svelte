@@ -37,8 +37,10 @@
 
 <style>
 	div {
+		position: relative;
 		background-color: #353535;
-		border-radius: 5px;
+		border-radius: 15px;
+		border-bottom-left-radius: 0px;
 		padding: 10px;
 		word-break: break-word;
 		width: fit-content;
@@ -47,6 +49,8 @@
 	}
 	/* message sent by this user */
 	div.own {
+		border-radius: 15px;
+		border-bottom-right-radius: 0px;
 		align-self: flex-end;
 		text-align: right;
 		background-color: var(--contrasting-dim);
