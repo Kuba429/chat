@@ -47,20 +47,6 @@
 </Modal>
 
 <style>
-	input {
-		padding: 10px;
-		font-size: 1.3rem;
-		background-color: var(--secondary);
-		color: var(--contrasting);
-		box-sizing: border-box;
-		transition: ease border 0.2s;
-		outline: none;
-		border: 1px solid transparent;
-		border-radius: 5px;
-	}
-	input:focus {
-		border: 1px solid var(--contrasting-dim);
-	}
 	form {
 		display: flex;
 		gap: 1rem;
@@ -75,7 +61,6 @@
 		border: dashed 2px transparent;
 		margin: 0;
 		padding: 0;
-
 		cursor: pointer;
 		background-color: var(--secondary);
 		color: inherit;

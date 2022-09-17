@@ -21,6 +21,7 @@ func Init() {
 		for _, users := range MainHub.Rooms {
 			sum += int(len(users))
 		}
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Write([]byte(strconv.Itoa(sum)))
 	})
 	log.Fatal(http.ListenAndServe(":"+PORT, nil))
