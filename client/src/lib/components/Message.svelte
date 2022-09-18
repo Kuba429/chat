@@ -42,7 +42,7 @@
 		border-radius: 15px;
 		border-bottom-left-radius: 0px;
 		padding: 10px;
-		word-break: break-word;
+
 		width: fit-content;
 		height: fit-content;
 		max-width: 70vw;
@@ -59,10 +59,32 @@
 	div.dim {
 		opacity: 0.8;
 	}
+	div::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		right: unset;
+		left: 0;
+		transform: translateY(100%);
+		background-color: transparent;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 7px 7px 0 0;
+		border-color: var(--secondary) transparent transparent transparent;
+	}
+	div.own::after {
+		right: 0;
+		left: unset;
+		border-width: 0 7px 7px 0;
+		border-color: transparent var(--contrasting-dim) transparent transparent;
+	}
 	p,
 	pre {
 		padding: 0;
 		margin: 0;
+		word-break: break-word;
+		white-space: pre-wrap;
 	}
 	p.username {
 		font-size: 1.2rem;
