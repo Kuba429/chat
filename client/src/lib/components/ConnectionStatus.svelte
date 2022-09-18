@@ -29,6 +29,7 @@
 	span.room-status ul {
 		display: none;
 		position: absolute;
+		z-index: 1;
 		bottom: -100%;
 		right: 0;
 		box-sizing: content-box;
