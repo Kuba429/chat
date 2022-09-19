@@ -47,6 +47,7 @@
 	}
 	form {
 		display: flex;
+		gap: 10px;
 		flex-wrap: wrap;
 		flex-direction: column;
 		justify-content: center;
