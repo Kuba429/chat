@@ -35,4 +35,8 @@
 	span.username {
 		font-size: 1.5rem;
 	}
+	div {
+		display: flex;
+		gap: 10px;
+	}
 </style>

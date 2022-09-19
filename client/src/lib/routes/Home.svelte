@@ -19,7 +19,12 @@
 </script>
 
 <form on:submit={handleSubmit}>
-	<input placeholder="Username" bind:value={usernameValue} type="text" />
+	<input
+		max="16"
+		placeholder="Username"
+		bind:value={usernameValue}
+		type="text"
+	/>
 	<input placeholder="Room" bind:value={roomValue} type="text" />
 	<button type="submit"><i class="fa-solid fa-arrow-right" /></button>
 </form>

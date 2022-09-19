@@ -37,6 +37,7 @@
 <Modal close={() => dispatch("close")}>
 	<form on:submit={handleSubmit}>
 		<input
+			max="16"
 			type="text"
 			placeholder="Username"
 			bind:value={username}
