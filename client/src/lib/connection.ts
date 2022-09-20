@@ -11,9 +11,12 @@ export class Connection {
 	id: string;
 	room: string;
 	constructor(room: string) {
-		this.ws = new WebSocket(import.meta.env.VITE_WS_SERVER);
+		this.connect();
 		this.id = v4();
 		this.room = room;
+	}
+	connect() {
+		this.ws = new WebSocket(import.meta.env.VITE_WS_SERVER);
 
 		// event handlers
 		this.ws.onopen = () => {
@@ -23,6 +26,7 @@ export class Connection {
 		this.ws.onclose = () => {
 			console.log("close");
 			connStatus.set(false);
+			this.connect(); // try to reconnect
 		};
 		// this.receive has no access to 'this' when it's assigned directly
 		this.ws.onmessage = (m) => this.receive(m);
