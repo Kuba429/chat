@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
 type head = {
-	title: string;
+	notificationCount: number;
 };
-export const headStore = writable<head>({ title: "Chat" });
+export const headStore = writable<head>({ notificationCount: 0 });

@@ -5,7 +5,7 @@
 	import InputPanel from "../components/InputPanel.svelte";
 	import Header from "../components/Header.svelte";
 	import { headStore } from "../stores/head";
-	export let currentRoute;
+	export let currentRoute: any; // TODO maybe add a better type
 	const roomId = currentRoute.namedParams.room;
 	let conn: Connection = new Connection(roomId);
 	onDestroy(() => {
@@ -14,10 +14,14 @@
 	});
 
 	setContext("conn", conn);
+	let titleNumber = "";
+	$: titleNumber = $headStore.notificationCount
+		? `(+${$headStore.notificationCount})`
+		: "";
 </script>
 
 <svelte:head>
-	<title>{$headStore.title}</title>
+	<title>{titleNumber} Chat</title>
 </svelte:head>
 <div>
 	<Header />

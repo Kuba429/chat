@@ -100,25 +100,25 @@ export class Connection {
 const notify = (() => {
 	if ("Notification" in window) {
 		Notification.requestPermission();
-		document.addEventListener("visibilitychange", () => {
-			if (!document.hidden)
-				headStore.update((state) => ({ ...state, title: "Chat" }));
-		});
-		return (message: message) => {
-			if (document.hidden) {
-				headStore.update((state) => ({
-					...state,
-					title: `${message.SenderName}: ${message.Data}`,
-				}));
+	}
+	document.addEventListener("visibilitychange", () => {
+		if (!document.hidden)
+			headStore.update((state) => ({
+				...state,
+				notificationCount: 0,
+			}));
+	});
+	return (message: message) => {
+		if (document.hidden) {
+			headStore.update((state) => ({
+				...state,
+				notificationCount: state.notificationCount + 1,
+			}));
+			"Notification" in window &&
 				new Notification(message.SenderName, {
 					body: message.Data,
 					tag: message.Room,
 				});
-			}
-		};
-	}
-	// Notifications not supported
-	return (_: message) => {
-		return;
+		}
 	};
 })();
