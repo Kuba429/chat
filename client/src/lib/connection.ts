@@ -1,5 +1,5 @@
 import type { message } from "./types";
-import { defaultUsername, getUsername } from "./username";
+import { defaultUsername, getUsername } from "./utils/username";
 import { v4 } from "uuid";
 import { messagesStore } from "./stores/messages";
 import { roomStatusStore } from "./stores/roomStatus";

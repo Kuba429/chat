@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defaultUsername, getUsername } from "../username";
+	import { defaultUsername, getUsername } from "../utils/username";
 	import UsernameModal from "./UsernameModal.svelte";
 	import ConnectionStatus from "./ConnectionStatus.svelte";
 

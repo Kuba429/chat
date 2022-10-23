@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { navigateTo } from "svelte-router-spa";
-	import { defaultUsername, getUsername, setUsername } from "../username";
+	import {
+		defaultUsername,
+		getUsername,
+		setUsername,
+	} from "../utils/username";
 	let roomValue: string;
 	let usernameValue = getUsername() || defaultUsername;
 	const handleSubmit = (e) => {

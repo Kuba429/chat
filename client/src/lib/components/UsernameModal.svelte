@@ -3,7 +3,7 @@
 	import { v4 } from "uuid";
 	import type { Connection } from "../connection";
 	import type { message } from "../types";
-	import { getUsername, setUsername } from "../username";
+	import { getUsername, setUsername } from "../utils/username";
 	import Modal from "./Modal.svelte";
 
 	const dispatch = createEventDispatcher();

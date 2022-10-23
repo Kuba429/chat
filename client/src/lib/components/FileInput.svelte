@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Writable } from "svelte/store";
 
-	import { toBase64 } from "../toBase64";
+	import { toBase64 } from "../utils/toBase64";
 
 	export let imageStore: Writable<string>;
 	const handleInput = async (e: Event) => {
