@@ -2,7 +2,6 @@
 	import { getContext, onMount } from "svelte";
 	import { writable } from "svelte/store";
 	import type { Connection } from "../connection";
-	import { messagesStore } from "../stores/messages";
 	import FileInput from "./FileInput.svelte";
 
 	const conn: Connection = getContext("conn");
@@ -65,7 +64,10 @@
 	};
 	// set button height to textarea's original height (when textarea has only 1 row)
 	onMount(() => {
-		textareaOgHeight = parseInt(getComputedStyle(textarea).height);
+		const height = parseInt(getComputedStyle(textarea).height);
+		// only change the height when height can be determined
+		if (isNaN(height)) return;
+		textareaOgHeight = height;
 	});
 </script>
 
